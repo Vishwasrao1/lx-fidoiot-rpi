@@ -1,0 +1,63 @@
+software =
+{
+	version = "0.1";
+
+	phytec = {
+		hardware-compatibility: [ "revA"];
+		stable : {
+			copy1 : {
+				images: (
+					{
+						filename = "phytec-qt5demo-image-phyboard-pollux-imx8mp-3.ext4.gz";
+						type = "raw";
+						compressed = "zlib";
+						device = "/dev/mmcblk1p2";
+					}
+				);
+				scripts: (
+					{
+						filename = "emmcsetup.lua";
+						type = "lua";
+					}
+				);
+                                uboot: (
+                                        {
+                                                name = "root";
+                                                value = "2";
+                                        },
+					{
+						name = "bootcmd";
+						value = "if test ${mmcroot} = ${root}; then run loadimage && run mmcboot; else env set mmcroot ${root} && env set ustate 2 && saveenv && run loadimage && run mmcboot; fi;";
+					}
+				);
+
+			};
+			copy2 : {
+				images: (
+					{
+						filename = "phytec-qt5demo-image-phyboard-pollux-imx8mp-3.ext4.gz";
+						type = "raw";
+						compressed = "zlib";
+						device = "/dev/mmcblk1p3";
+					}
+				);
+				scripts: (
+					{
+						filename = "emmcsetup.lua";
+						type = "lua";
+					}
+				);
+                                uboot: (
+                                        {
+                                                name = "root";
+                                                value = "3";
+                                        },
+					{
+						name = "bootcmd";
+						value = "if test ${mmcroot} = ${root}; then run loadimage && run mmcboot; else env set mmcroot ${root} && env set ustate 2 && saveenv && run loadimage && run mmcboot; fi;";
+					}
+				);
+			};
+		};
+	}
+}

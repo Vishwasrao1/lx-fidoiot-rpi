@@ -1,0 +1,10 @@
+[Unit]
+Description=Run FDO Linux Client at boot if DI is complete
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/bash -c 'if [ -f /opt/fdo/DIStatus ]; then cd /opt/fdo && ./linux-client; fi'
+
+[Install]
+WantedBy=multi-user.target

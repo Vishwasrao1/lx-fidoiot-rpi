@@ -10,6 +10,3 @@
 [submodule "poky"]
 	path = poky
 	url = git://git.yoctoproject.org/poky.git
-[submodule "meta-swupdate-boards"]
-	path = meta-swupdate-boards
-	url = https://github.com/sbabic/meta-swupdate-boards.git

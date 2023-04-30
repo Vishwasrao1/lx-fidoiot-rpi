@@ -3,8 +3,8 @@ FILESEXTRAPATHS:append := "${THISDIR}/${PN}:"
 PACKAGECONFIG_CONFARGS = ""
 
 SRC_URI += " \
-    file://swupdate.cfg \
     file://swupdate-progress.c \
+    file://defconfig \
     "
 
 #do_install:append() {
@@ -16,6 +16,7 @@ do_compile:prepend() {
 }
 
 SYSTEMD_AUTO_ENABLE_swupdate.socket = "disable"
-#SYSTEMD_AUTO_ENABLE_swupdate-progress = "disable"
+SYSTEMD_AUTO_ENABLE_swupdate-progress = "disable"
 SYSTEMD_SERVICE_${PN} = "swupdate.service"
+SYSTEMD_AUTO_ENABLE_swupdate = "disable"
 

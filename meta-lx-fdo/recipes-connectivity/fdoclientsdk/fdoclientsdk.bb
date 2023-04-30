@@ -6,8 +6,8 @@ BB_STRICT_CHECKSUM = "0"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fa818a259cbed7ce8bc2a22d35a464fc"
 
-SRCREV = "0e6913c0309232a5556dffad64e5a3740c903c62"
-SRC_URI = "git://github.com/Vishwasrao1/client-sdk-fidoiot.git"
+SRCREV = "ba26ebbf8cebea1e3d037a28614cc9552345ebc8"
+SRC_URI = "git://github.com/Vishwasrao1/client-sdk-fidoiot.git;branch=rpi"
 
 #adding just for testing & development purpose will be removed in release
 SRC_URI += "\
@@ -15,13 +15,14 @@ SRC_URI += "\
     file://ecdsa384privkey.pem \
     file://manufacturer_addr.bin \
     file://manufacturer_sn.bin \
+    file://fdolinuxclient.service \
 "
 
 S = "${WORKDIR}/git"
 
 TOOLCHAIN = "POKY-GLIBC"
 APP_NAME = "c_code_sdk"
-DEPENDS += "openssl gcc curl safestringlib tinycbor metee"
+DEPENDS += "openssl gcc curl safestringlib tinycbor metee systemd"
 PREFERRED_VERSION_curl = "7.86"
 
 inherit pkgconfig cmake
@@ -61,6 +62,8 @@ do_install() {
     cp -r "${WORKDIR}/manufacturer_sn.bin" "${D}/opt/fdo/data/"
     install -d "${D}/opt/fdo/data_bkp"
     cp -r "${WORKDIR}/git/data/" "${D}/opt/fdo/data_bkp"
+    install -d "${D}/etc/systemd/system"
+    cp -r "${WORKDIR}/fdolinuxclient.service" "${D}/etc/systemd/system/"
 }
 
 do_package_qa[noexec] = "1"

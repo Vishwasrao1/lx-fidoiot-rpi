@@ -16,7 +16,7 @@ inherit cmake
 
 do_compile() {
     cd ${S}
-    cmake .
+    cmake -G "Unix Makefiles" .
     make -j4
 }
 

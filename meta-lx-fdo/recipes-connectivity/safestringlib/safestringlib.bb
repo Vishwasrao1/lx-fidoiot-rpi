@@ -14,7 +14,8 @@ do_compile() {
         cd ${S}
         rm -rf makefile
         sed -i '/mmitigate-rop/d' ./CMakeLists.txt
-        cmake .
+        rm -rf CMakeCache.txt CMakeFiles
+        cmake -G "Unix Makefiles" .
         make
         cp libsafestring_static.a libsafestring.a
     fi

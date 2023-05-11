@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/bash -c 'if [ -f /opt/fdo/DIStatus ]; then cd /opt/fdo && ./linux-client; fi'
+ExecStart=bash -c 'if [ -f /opt/fdo/DIStatus ]; then cd /opt/fdo && ./linux-client; fi'
 
 [Install]
 WantedBy=multi-user.target

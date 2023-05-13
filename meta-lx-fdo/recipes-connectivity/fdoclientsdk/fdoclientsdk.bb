@@ -6,7 +6,7 @@ BB_STRICT_CHECKSUM = "0"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fa818a259cbed7ce8bc2a22d35a464fc"
 
-SRCREV = "ba26ebbf8cebea1e3d037a28614cc9552345ebc8"
+SRCREV = "bf71e40ed5a7433e5a686790b6d6b47c1d533569"
 SRC_URI = "git://github.com/Vishwasrao1/client-sdk-fidoiot.git;branch=rpi"
 
 #adding key and manufacturer data just for testing & development purpose will be removed in release
@@ -16,6 +16,7 @@ SRC_URI += "\
     file://manufacturer_addr.bin \
     file://manufacturer_sn.bin \
     file://fdolinuxclient.service \
+    file://hawkbit-onboarding.sh \
 "
 
 SYSTEMD_AUTO_ENABLE = "enable"
@@ -58,6 +59,7 @@ do_compile(){
 do_install() {
     install -d "${D}/opt/fdo"
     install "${WORKDIR}/git/build/linux-client" "${D}/opt/fdo"
+    install -m 0755 "${WORKDIR}/hawkbit-onboarding.sh" "${D}/opt/fdo"
     install -d "${D}/opt/fdo/data"
     cp -r "${WORKDIR}/git/data/" "${D}/opt/fdo/"
     cp -r "${WORKDIR}/ecdsa384privkey.dat" "${D}/opt/fdo/data/"

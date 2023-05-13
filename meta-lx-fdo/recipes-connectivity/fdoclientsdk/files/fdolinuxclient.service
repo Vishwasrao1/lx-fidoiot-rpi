@@ -4,7 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=bash -c 'if [ -f /opt/fdo/DIStatus ]; then cd /opt/fdo && ./linux-client; fi'
+ExecStart=/bin/bash -c 'if [ -f /opt/fdo/DIStatus ]; then cd /opt/fdo && ./linux-client && ./hawkbit-onboarding.sh; fi'
+Nice=-20
 
 [Install]
 WantedBy=multi-user.target
